@@ -76,7 +76,7 @@ def image_loader(path):
 
 #Loading the original and the style image
 original_image=image_loader('Nikola-Tesla.jpg')
-style_image=image_loader('style.png')
+style_image=image_loader('style Image.jpg')
 
 #Creating the generated image from the original image
 generated_image=original_image.clone().requires_grad_(True)
@@ -113,10 +113,10 @@ def calculate_loss(gen_features, orig_feautes, style_featues):
 model=VGG().to(device).eval() 
 
 #initialize the paramerters required for fitting the model
-epoch=1000
-lr=0.001
-alpha=1
-beta=0.01
+epoch=7000
+lr=0.004
+alpha=8
+beta=70
 
 #using adam optimizer and it will update the generated image not the model parameter 
 optimizer=optim.Adam([generated_image],lr=lr)
@@ -136,10 +136,10 @@ for e in range (epoch):
     optimizer.step()
     
     #print the image and save it after each 100 epoch
-    if(e/100):
+    if(not (e%100)):
         print(total_loss)
         
-        save_image(generated_image,"gen6.png")
+        save_image(generated_image,"gen.png")
     
         
         
